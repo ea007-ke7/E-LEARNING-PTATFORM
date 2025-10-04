@@ -1,5 +1,6 @@
-# E-LEARNING-PTATFORM
-A simple database schema for an E-learning platform using Supabase (students, courses, enrollments).
+<div>
+  <h2>E-LEARNING PLATFORM</h2>
+</div>
 # 📗 Table of Contents
 
 - [📖 About the Project](#about-project)
@@ -8,11 +9,12 @@ A simple database schema for an E-learning platform using Supabase (students, co
     - [Key Features](#key-features)
   - [🚀 Live Demo](#live-demo)
 - [💻 Getting Started](#getting-started)
-  - [Setup](#setup)
   - [Prerequisites](#prerequisites)
+  - [Setup](#setup)
   - [Install](#install)
   - [Usage](#usage)
   - [Run tests](#run-tests)
+  - [Erd diagram](#erd)
   - [Deployment](#triangular_flag_on_post-deployment)
 - [👥 Authors](#authors)
 - [🔭 Future Features](#future-features)
@@ -24,7 +26,7 @@ A simple database schema for an E-learning platform using Supabase (students, co
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 E-LEARNING-PTATFORM
+# 📖 E-LEARNING-PLATFORM<a name=""></a>
 
 > This project is a simple relational database for an **E-learning Platform**.  It is designed to store information about:
 - **Students** registered on the platform
@@ -34,17 +36,17 @@ A simple database schema for an E-learning platform using Supabase (students, co
 This project was created as part of a database course assignment. It demonstrates schema design, foreign keys, sample data insertion, and documentation.
 
 
-## 🛠 Built With 
+## 🛠 Built With <a name="built-with"></a>
 **PostgreSQL** (via [Supabase](https://supabase.com)).
 
 
-### Tech Stack 
+### Tech Stack <a name="tech-stack"></a>
 
 - **Database**: PostgreSQL (hosted on Supabase)
 - **Tools**: Supabase SQL Editor, Supabase CLI
 - **Diagram**: Entity Relationship Diagram (ERD)
 
-### Key Features
+### Key Features<a name="key-features"></a>
 -  Three relational tables: `students`, `courses`, `enrollments`
 -  At least **5 sample rows per table**
 -  Foreign key relationships (`students ↔ enrollments`, `courses ↔ enrollments`)
@@ -63,18 +65,15 @@ This project was created as part of a database course assignment. It demonstrate
    git clone https://github.com/your-username/elearning-db.git
    cd elearning-db
    
-### Prerequisites
+### Prerequisites<a name="prerequisites"></a>
 
 In order to run this project you need:
 - A Supabase account (free)
 - (Optional) PostgreSQL installed locally
 - (Optional) Supabase CLI installed
 
-Install
 
-No installation required. Just run the SQL script.
-
-### Setup
+### Setup<a name="setup"></a>
 
 Clone this repository to your desired folder:
 
@@ -87,7 +86,7 @@ Example commands:
 ```
 --->
 
-### Install
+### Install<a name="install"></a>
 
 No installation required. Just run the SQL script on supabase by
 1.Logging in to Supabase.
@@ -97,7 +96,7 @@ No installation required. Just run the SQL script on supabase by
 Run the script → tables and sample data will be created.
 
 
-### Usage
+### Usage<a name="usage"></a>
 
 To run the project, execute the following command:
 
@@ -159,7 +158,7 @@ INSERT INTO enrollments (student_id, course_id, enrolled_at) VALUES
 ```
 --->
 
-### Run tests
+### Run tests<a name="run-tests"></a>
 
 To run tests, run the following command:
 
@@ -191,21 +190,21 @@ SELECT * FROM Enrollments;
 
 
 ---
-### ERD DIAGRAM
+### ERD DIAGRAM<a name="erd"></a>
 
-### DATA DICTIONARY
+### DATA DICTIONARY<a name=""></a>
 ---
 [Data Dictionary](https://github.com/ea007-ke7/E-LEARNING-PTATFORM/blob/test_tool/data_dictionary.md)
 
 
-### Deployment
+### Deployment<a name="triangular_flag_on_post-deployment"></a>
 
 This is a schema-only project.
 
 Deployment = loading schema.sql into Supabase or any PostgreSQL instance.
 
 
-## 👥 Authors 
+## 👥 Authors <a name="authors"></a>
 
 > Mention all of the collaborators of this project.
 
@@ -215,7 +214,7 @@ Deployment = loading schema.sql into Supabase or any PostgreSQL instance.
 - LinkedIn: [LinkedIn]()
 
 
-## 🔭 Future Features
+## 🔭 Future Features<a name="future-features"></a>
  
 * [ ] **Add instructors table**
 * [ ] **Add assignments and grades tables**
@@ -224,7 +223,7 @@ Deployment = loading schema.sql into Supabase or any PostgreSQL instance.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## 🤝 Contributing 
+## 🤝 Contributing <a name="contributing"></a>
 
 Contributions, issues, and feature requests are welcome!
 
@@ -234,22 +233,22 @@ Feel free to open a PR in this repo.
 
 <!-- SUPPORT -->
 
-## ⭐️ Show your support 
+## ⭐️ Show your support <a name="support"></a>
 
 If you like this project, please ⭐️ the repo!
 
-🙏 Acknowledgements
+🙏 Acknowledgements <a name="acknowledgements"></a> 
 
 Thanks to [Supabase](https://www.google.com/search?q=supabase&oq=supa&gs_lcrp=EgZjaHJvbWUqBwgDEAAYjwIyBggAEEUYOTIHCAEQABiPAjIHCAIQABiPAjIHCAMQABiPAtIBCDMxODhqMGoxqAIAsAIA&sourceid=chrome&ie=UTF-8) for free PostgreSQL hosting.
 
 Inspired by real-world E-learning platforms.
 
-# ❓ FAQ (OPTIONAL)
+# ❓ FAQ (OPTIONAL)<a name="faqs"></a>
 
 - Q: Can I run this without Supabase? A: Yes, just use PostgreSQL locally and run schema.sql.
 
 
-### 📝 **License**
+### 📝 **License**<a name="license"></a>
 
 This project is licensed under the [MIT License](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository)
 
