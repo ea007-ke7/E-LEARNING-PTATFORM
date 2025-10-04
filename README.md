@@ -26,7 +26,7 @@
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 E-LEARNING-PLATFORM<a name=""></a>
+# 📖 E-LEARNING-PLATFORM<a name="about-project"></a>
 
 > This project is a simple relational database for an **E-learning Platform**.  It is designed to store information about:
 - **Students** registered on the platform
@@ -243,7 +243,7 @@ Thanks to [Supabase](https://www.google.com/search?q=supabase&oq=supa&gs_lcrp=Eg
 
 Inspired by real-world E-learning platforms.
 
-# ❓ FAQ (OPTIONAL)<a name="faqs"></a>
+# ❓ FAQ (OPTIONAL)<a name="faq"></a>
 
 - Q: Can I run this without Supabase? A: Yes, just use PostgreSQL locally and run schema.sql.
 
