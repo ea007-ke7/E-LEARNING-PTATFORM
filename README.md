@@ -28,7 +28,7 @@
 
 # 📖 E-LEARNING-PLATFORM<a name="about-project"></a>
 
-> This project is a simple relational database for an **E-learning Platform**.  It is designed to store information about:
+- This project is a simple relational database for an **E-learning Platform**.  It is designed to store information about:
 - **Students** registered on the platform
 - **Courses** offered
 - **Enrollments** that connect students to courses  
