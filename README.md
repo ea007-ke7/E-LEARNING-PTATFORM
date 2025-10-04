@@ -1,5 +1,5 @@
 <div>
-  <h2>E-LEARNING PLATFORM</h2>
+  <h1>E-LEARNING PLATFORM</h1>
 </div>
 # 📗 Table of Contents
 
