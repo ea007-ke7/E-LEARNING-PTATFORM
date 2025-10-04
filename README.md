@@ -189,10 +189,10 @@ SELECT * FROM Enrollments;
 <img width="1913" height="600" alt="image" src="https://github.com/user-attachments/assets/559cfec8-fd26-4f37-af49-bab85d444dc3" />
 
 
---->
-###ERD DIAGRAM
+---
+### ERD DIAGRAM
 
-###DATA DICTIONARY
+### DATA DICTIONARY
 ---
 [Data Dictionary](https://github.com/ea007-ke7/E-LEARNING-PTATFORM/blob/test_tool/data_dictionary.md)
 
@@ -216,9 +216,9 @@ Deployment = loading schema.sql into Supabase or any PostgreSQL instance.
 
 ## 🔭 Future Features
 
-1.**Add instructors table**
-2.**Add assignments and grades tables**
-3.**Role-based access control (students vs instructors)]**
+[] **Add instructors table**
+[] **Add assignments and grades tables**
+[] **Role-based access control (students vs instructors)]**
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -239,7 +239,7 @@ If you like this project, please ⭐️ the repo!
 
 🙏 Acknowledgements
 
-Thanks to Supabase for free PostgreSQL hosting.
+Thanks to [Supabase](https://www.google.com/search?q=supabase&oq=supa&gs_lcrp=EgZjaHJvbWUqBwgDEAAYjwIyBggAEEUYOTIHCAEQABiPAjIHCAIQABiPAjIHCAMQABiPAtIBCDMxODhqMGoxqAIAsAIA&sourceid=chrome&ie=UTF-8) for free PostgreSQL hosting.
 
 Inspired by real-world E-learning platforms.
 
