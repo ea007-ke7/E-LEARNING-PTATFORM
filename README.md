@@ -110,6 +110,9 @@ CREATE TABLE students (
     email VARCHAR(100) UNIQUE NOT NULL,
     created_at TIMESTAMP DEFAULT NOW()
 );
+```
+
+```sql
 
 -- Insert sample data
 INSERT INTO students (name, email, created_at) VALUES
@@ -118,7 +121,8 @@ INSERT INTO students (name, email, created_at) VALUES
 ('Charles Weko', 'charlesweko@egmail.com', '2025-09-03 09:45:00'),
 ('Diana Juma', 'dianaj@gmail.com', '2025-09-04 14:20:00'),
 ('Ethan Liko', 'ethanliko@gmail.com', '2025-09-05 16:10:00');
-
+```
+```sql
 -- Courses Table
 CREATE TABLE courses (
     id SERIAL PRIMARY KEY,
@@ -126,14 +130,16 @@ CREATE TABLE courses (
     description TEXT,
     created_at TIMESTAMP DEFAULT NOW()
 );
-
+```
+```sql
 INSERT INTO courses (title, description, created_at) VALUES
 ('SQL Basics', 'Intro to SQL and Databases', '2025-09-01 08:00:00'),
 ('Python for Beginners', 'Learn Python fundamentals', '2025-09-01 09:30:00'),
 ('Web Development 101', 'HTML, CSS, and JavaScript basics', '2025-09-02 10:00:00'),
 ('Data Analysis with SQL', 'Analyze data using SQL queries', '2025-09-03 11:00:00'),
 ('Intro to Machine Learning', 'Basics of ML algorithms', '2025-09-04 12:00:00');
-
+```
+```sql
 -- Enrollments Table
 CREATE TABLE enrollments (
     id SERIAL PRIMARY KEY,
@@ -141,7 +147,8 @@ CREATE TABLE enrollments (
     course_id INT REFERENCES courses(id),
     enrolled_at TIMESTAMP DEFAULT NOW()
 );
-
+```
+```sql
 INSERT INTO enrollments (student_id, course_id, enrolled_at) VALUES
 (1, 1, '2025-09-06 09:00:00'),
 (1, 2, '2025-09-06 09:15:00'),
@@ -158,10 +165,30 @@ To run tests, run the following command:
 
 ```sql
   SELECT * FROM students;
+```
+
+**output for all students**
+<img width="1905" height="772" alt="image" src="https://github.com/user-attachments/assets/73973fa8-95b8-4e16-8254-c93eea4f3745" />
+
+
+```sql
 SELECT * FROM courses;
-SELECT * FROM enrollments;
+```
+**output for all courses**
+```sql
+SELECT * FROM Courses;
 
 ```
+<img width="1913" height="600" alt="image" src="https://github.com/user-attachments/assets/9ce261c5-1642-481d-9974-33456b62b8f6" />
+
+**output for all courses**
+```sql
+SELECT * FROM Enrollments;
+
+```
+<img width="1913" height="600" alt="image" src="https://github.com/user-attachments/assets/559cfec8-fd26-4f37-af49-bab85d444dc3" />
+
+
 --->
 
 ### Deployment
@@ -177,9 +204,8 @@ Deployment = loading schema.sql into Supabase or any PostgreSQL instance.
 
 👤 **Author1**
 
-- GitHub: [@githubhandle](https:/github.com/ea007-ke7
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
+- GitHub: [@githubhandle](https://github.com/ea007-ke7)
+- LinkedIn: [LinkedIn]()
 
 
 ## 🔭 Future Features
