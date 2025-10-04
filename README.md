@@ -190,6 +190,12 @@ SELECT * FROM Enrollments;
 
 
 --->
+###ERD DIAGRAM
+
+###DATA DICTIONARY
+---
+[Data Dictionary](https://github.com/ea007-ke7/E-LEARNING-PTATFORM/blob/test_tool/data_dictionary.md)
+
 
 ### Deployment
 
