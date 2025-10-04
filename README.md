@@ -216,10 +216,10 @@ Deployment = loading schema.sql into Supabase or any PostgreSQL instance.
 
 
 ## 🔭 Future Features
-
-[] **Add instructors table**
-[] **Add assignments and grades tables**
-[] **Role-based access control (students vs instructors)]**
+ 
+* [ ] **Add instructors table**
+* [ ] **Add assignments and grades tables**
+* [ ] **Role-based access control (students vs instructors)]**
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -246,20 +246,12 @@ Inspired by real-world E-learning platforms.
 
 # ❓ FAQ (OPTIONAL)
 
-Q: Can I run this without Supabase?
-A: Yes, just use PostgreSQL locally and run schema.sql.
+- Q: Can I run this without Supabase? A: Yes, just use PostgreSQL locally and run schema.sql.
 
-
-
-## 🙏 Acknowledgments <a name="acknowledgements"></a>
-
-Thanks to Supabase for free PostgreSQL hosting.
-
-Inspired by real-world E-learning platforms.
 
 ### 📝 **License**
 
-This project is licensed under the MIT License
+This project is licensed under the [MIT License](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository)
 
 NOTE: we recommend using the MIT license - you can set it up quickly by using templates available on GitHub. You can also use any other license if you wish.
 
