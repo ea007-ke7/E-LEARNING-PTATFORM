@@ -58,4 +58,4 @@ Stores relationships between students and courses (which student is enrolled in 
 ---
 
 ## 📊 ERD Reference
-See `/docs/erd.png` for a visual diagram of the relationships.
+![Erd]()for a visual diagram of the relationships.
