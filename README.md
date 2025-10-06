@@ -191,6 +191,9 @@ SELECT * FROM Enrollments;
 
 ---
 ### ERD DIAGRAM<a name="erd"></a>
+---
+<img width="2284" height="1364" alt="image" src="https://github.com/user-attachments/assets/102a7806-8cc0-4e62-ac79-e85bf1e3fac5" />
+
 
 ### DATA DICTIONARY<a name=""></a>
 ---
