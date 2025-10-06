@@ -181,7 +181,7 @@ SELECT * FROM Courses;
 <img width="1913" height="600" alt="image" src="https://github.com/user-attachments/assets/9ce261c5-1642-481d-9974-33456b62b8f6" />
 
 
-**output for all courses**
+**output for all enrollments**
 ```sql
 SELECT * FROM Enrollments;
 
