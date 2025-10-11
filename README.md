@@ -213,8 +213,8 @@ Deployment = loading schema.sql into Supabase or any PostgreSQL instance.
 
 👤 **Author1**
 
-- GitHub: [@githubhandle](https://github.com/ea007-ke7)
-- LinkedIn: [LinkedIn]()
+- GitHub: [@ea007-ke7](https://github.com/ea007-ke7)
+- LinkedIn: [@edith othieno]()
 
 
 ## 🔭 Future Features<a name="future-features"></a>
@@ -243,7 +243,7 @@ If you like this project, please ⭐️ the repo!
 🙏 Acknowledgements <a name="acknowledgements"></a> 
 
 Thanks to [Supabase](https://www.google.com/search?q=supabase&oq=supa&gs_lcrp=EgZjaHJvbWUqBwgDEAAYjwIyBggAEEUYOTIHCAEQABiPAjIHCAIQABiPAjIHCAMQABiPAtIBCDMxODhqMGoxqAIAsAIA&sourceid=chrome&ie=UTF-8) for free PostgreSQL hosting.
-
+And drawio, for generating Entity Relationship Diagram.
 Inspired by real-world E-learning platforms.
 
 # ❓ FAQ (OPTIONAL)<a name="faq"></a>
