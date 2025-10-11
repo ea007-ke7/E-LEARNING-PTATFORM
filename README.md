@@ -244,7 +244,7 @@ If you like this project, please ⭐️ the repo!
 
 Thanks to [Supabase](https://www.google.com/search?q=supabase&oq=supa&gs_lcrp=EgZjaHJvbWUqBwgDEAAYjwIyBggAEEUYOTIHCAEQABiPAjIHCAIQABiPAjIHCAMQABiPAtIBCDMxODhqMGoxqAIAsAIA&sourceid=chrome&ie=UTF-8) for free PostgreSQL hosting.
 And drawio, for generating Entity Relationship Diagram.
-Inspired by real-world E-learning platforms.
+I am Inspired by real-world E-learning platforms.
 
 # ❓ FAQ (OPTIONAL)<a name="faq"></a>
 
