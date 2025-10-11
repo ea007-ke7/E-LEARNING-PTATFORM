@@ -214,7 +214,7 @@ Deployment = loading schema.sql into Supabase or any PostgreSQL instance.
 👤 **Author1**
 
 - GitHub: [@ea007-ke7](https://github.com/ea007-ke7)
-- LinkedIn: [@edith othieno]()
+- LinkedIn: [@edith othieno](https://www.linkedin.com/in/edith-othieno7)
 
 
 ## 🔭 Future Features<a name="future-features"></a>
