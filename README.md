@@ -1,39 +1,6 @@
-<!--
-HOW TO USE:
-This is an example of how you may give instructions on setting up your project locally.
-
-Modify this file to match your project and remove sections that don't apply.
-
-REQUIRED SECTIONS:
-- Table of Contents
-- About the Project
-  - Built With
-  - Live Demo
-- Getting Started
-- Authors
-- Future Features
-- Contributing
-- Show your support
-- Acknowledgements
-- License
-
-OPTIONAL SECTIONS:
-- FAQ
-
-After you're finished please remove all the comments and instructions!
--->
-
-<div align="center">
-  <!-- You are encouraged to replace this logo with your own! Otherwise you can also remove it. -->
-  <img width="314" height="285" alt="image" src="https://github.com/user-attachments/assets/20661293-a214-4004-9042-657102fb0710" />
-  <br/>
-
-  <h3><b>Joy's ReadME Template</b></h3>
-
+<div>
+  <h1>E-LEARNING PLATFORM</h1>
 </div>
-
-<!-- TABLE OF CONTENTS -->
-
 # 📗 Table of Contents
 
 - [📖 About the Project](#about-project)
@@ -42,11 +9,12 @@ After you're finished please remove all the comments and instructions!
     - [Key Features](#key-features)
   - [🚀 Live Demo](#live-demo)
 - [💻 Getting Started](#getting-started)
-  - [Setup](#setup)
   - [Prerequisites](#prerequisites)
+  - [Setup](#setup)
   - [Install](#install)
   - [Usage](#usage)
   - [Run tests](#run-tests)
+  - [Erd diagram](#erd)
   - [Deployment](#triangular_flag_on_post-deployment)
 - [👥 Authors](#authors)
 - [🔭 Future Features](#future-features)
@@ -58,82 +26,54 @@ After you're finished please remove all the comments and instructions!
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 [your_project_name] <a name="about-project"></a>
+# 📖 E-LEARNING-PLATFORM<a name="about-project"></a>
 
-> Describe your project in 1 or 2 sentences.
+- This project is a simple relational database for an **E-learning Platform**.  It is designed to store information about:
+- **Students** registered on the platform
+- **Courses** offered
+- **Enrollments** that connect students to courses  
 
-**[your_project__name]** is a...
+This project was created as part of a database course assignment. It demonstrates schema design, foreign keys, sample data insertion, and documentation.
+
 
 ## 🛠 Built With <a name="built-with"></a>
+**PostgreSQL** (via [Supabase](https://supabase.com)).
+
 
 ### Tech Stack <a name="tech-stack"></a>
 
-> Describe the tech stack and include only the relevant sections that apply to your project e.g SQL.
+- **Database**: PostgreSQL (hosted on Supabase)
+- **Tools**: Supabase SQL Editor, Supabase CLI
+- **Diagram**: Entity Relationship Diagram (ERD)
 
-<details>
-  <summary>Client</summary>
-  <ul>
-    <li><a href="https://reactjs.org/">Supabase</a></li>
-  </ul>
-</details>
-
-<details>
-  <summary>Server</summary>
-  <ul>
-    <li><a href="https://expressjs.com/">SQL</a></li>
-  </ul>
-</details>
-
-<details>
-<summary>Database</summary>
-  <ul>
-    <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
-  </ul>
-</details>
-
-<!-- Features -->
-
-### Key Features <a name="key-features"></a>
-
-> Describe between 1-3 key features of the application.
-
-- **[key_feature_1]**
-- **[key_feature_2]**
-- **[key_feature_3]**
+### Key Features<a name="key-features"></a>
+-  Three relational tables: `students`, `courses`, `enrollments`
+-  At least **5 sample rows per table**
+-  Foreign key relationships (`students ↔ enrollments`, `courses ↔ enrollments`)
+-  Schema exported as `schema.sql
+  
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- LIVE DEMO -->
-
-## 🚀 Live Demo <a name="live-demo"></a>
-
-> Add a link to your deployed project only if available.
-
-- [Live Demo Link](https://yourdeployedapplicationlink.com)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
 
 ## 💻 Getting Started <a name="getting-started"></a>
 
-> Describe how a new developer could make use of your project.
-
-To get a local copy up and running, follow these steps.
-
-### Prerequisites
+1. Clone this repo:
+   ```bash
+   git clone https://github.com/your-username/elearning-db.git
+   cd elearning-db
+   
+### Prerequisites<a name="prerequisites"></a>
 
 In order to run this project you need:
+- A Supabase account (free)
+- (Optional) PostgreSQL installed locally
+- (Optional) Supabase CLI installed
 
-<!--
-Example command:
 
-```sh
- gem install rails
-```
- -->
-
-### Setup
+### Setup<a name="setup"></a>
 
 Clone this repository to your desired folder:
 
@@ -146,58 +86,126 @@ Example commands:
 ```
 --->
 
-### Install
+### Install<a name="install"></a>
 
-Install this project with:
+No installation required. Just run the SQL script on supabase by
+1.Logging in to Supabase.
+2.Open the SQL Editor.
+3.Copy-paste the contents of schema.sql.
 
-<!--
-Example command:
+Run the script → tables and sample data will be created.
 
-```sh
-  cd my-project
-  gem install
-```
---->
 
-### Usage
+### Usage<a name="usage"></a>
 
 To run the project, execute the following command:
 
-<!--
-Example command:
 
-```sh
-  rails server
+```sql
+ -- Students Table
+CREATE TABLE students (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+```
+
+```sql
+
+-- Insert sample data
+INSERT INTO students (name, email, created_at) VALUES
+('Jeanne Karanu', 'jkaranu@gmail.com', '2025-09-01 10:00:00'),
+('Joseline Othieno', 'jothieno@gmail.com', '2025-09-02 11:15:00'),
+('Charles Weko', 'charlesweko@egmail.com', '2025-09-03 09:45:00'),
+('Diana Juma', 'dianaj@gmail.com', '2025-09-04 14:20:00'),
+('Ethan Liko', 'ethanliko@gmail.com', '2025-09-05 16:10:00');
+```
+```sql
+-- Courses Table
+CREATE TABLE courses (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(150) NOT NULL,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+```
+```sql
+INSERT INTO courses (title, description, created_at) VALUES
+('SQL Basics', 'Intro to SQL and Databases', '2025-09-01 08:00:00'),
+('Python for Beginners', 'Learn Python fundamentals', '2025-09-01 09:30:00'),
+('Web Development 101', 'HTML, CSS, and JavaScript basics', '2025-09-02 10:00:00'),
+('Data Analysis with SQL', 'Analyze data using SQL queries', '2025-09-03 11:00:00'),
+('Intro to Machine Learning', 'Basics of ML algorithms', '2025-09-04 12:00:00');
+```
+```sql
+-- Enrollments Table
+CREATE TABLE enrollments (
+    id SERIAL PRIMARY KEY,
+    student_id INT REFERENCES students(id),
+    course_id INT REFERENCES courses(id),
+    enrolled_at TIMESTAMP DEFAULT NOW()
+);
+```
+```sql
+INSERT INTO enrollments (student_id, course_id, enrolled_at) VALUES
+(1, 1, '2025-09-06 09:00:00'),
+(1, 2, '2025-09-06 09:15:00'),
+(2, 3, '2025-09-07 10:30:00'),
+(3, 1, '2025-09-08 11:00:00'),
+(4, 5, '2025-09-09 13:45:00');
+
 ```
 --->
 
-### Run tests
+### Run tests<a name="run-tests"></a>
 
 To run tests, run the following command:
 
-<!--
-Example command:
-
-```sh
-  bin/rails test test/models/article_test.rb
+```sql
+  SELECT * FROM students;
 ```
---->
 
-### Deployment
+**output for all students**
+<img width="1905" height="772" alt="image" src="https://github.com/user-attachments/assets/73973fa8-95b8-4e16-8254-c93eea4f3745" />
 
-You can deploy this project using:
 
-<!--
-Example:
-
-```sh
+```sql
+SELECT * FROM courses;
+```
+**output for all courses**
+```sql
+SELECT * FROM Courses;
 
 ```
- -->
+<img width="1913" height="600" alt="image" src="https://github.com/user-attachments/assets/9ce261c5-1642-481d-9974-33456b62b8f6" />
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- AUTHORS -->
+**output for all enrollments**
+```sql
+SELECT * FROM Enrollments;
+
+```
+<img width="1913" height="600" alt="image" src="https://github.com/user-attachments/assets/559cfec8-fd26-4f37-af49-bab85d444dc3" />
+
+
+---
+### ERD DIAGRAM<a name="erd"></a>
+---
+<img width="2284" height="1364" alt="image" src="https://github.com/user-attachments/assets/102a7806-8cc0-4e62-ac79-e85bf1e3fac5" />
+
+
+### DATA DICTIONARY<a name=""></a>
+---
+[Data Dictionary](https://github.com/ea007-ke7/E-LEARNING-PTATFORM/blob/test_tool/data_dictionary.md)
+
+
+### Deployment<a name="triangular_flag_on_post-deployment"></a>
+
+This is a schema-only project.
+
+Deployment = loading schema.sql into Supabase or any PostgreSQL instance.
+
 
 ## 👥 Authors <a name="authors"></a>
 
@@ -205,37 +213,24 @@ Example:
 
 👤 **Author1**
 
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
+- GitHub: [@ea007-ke7](https://github.com/ea007-ke7)
+- LinkedIn: [@edith othieno](https://www.linkedin.com/in/edith-othieno7)
 
-👤 **Author2**
 
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
+## 🔭 Future Features<a name="future-features"></a>
+ 
+* [ ] **Add instructors table**
+* [ ] **Add assignments and grades tables**
+* [ ] **Role-based access control (students vs instructors)]**
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- FUTURE FEATURES -->
-
-## 🔭 Future Features <a name="future-features"></a>
-
-> Describe 1 - 3 features you will add to the project.
-
-- [ ] **[new_feature_1]**
-- [ ] **[new_feature_2]**
-- [ ] **[new_feature_3]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- CONTRIBUTING -->
 
 ## 🤝 Contributing <a name="contributing"></a>
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](../../issues/).
+Feel free to open a PR in this repo.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -243,44 +238,22 @@ Feel free to check the [issues page](../../issues/).
 
 ## ⭐️ Show your support <a name="support"></a>
 
-> Write a message to encourage readers to support your project
+If you like this project, please ⭐️ the repo!
 
-If you like this project...
+🙏 Acknowledgements <a name="acknowledgements"></a> 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+Thanks to [Supabase](https://www.google.com/search?q=supabase&oq=supa&gs_lcrp=EgZjaHJvbWUqBwgDEAAYjwIyBggAEEUYOTIHCAEQABiPAjIHCAIQABiPAjIHCAMQABiPAtIBCDMxODhqMGoxqAIAsAIA&sourceid=chrome&ie=UTF-8) for free PostgreSQL hosting.
+And drawio, for generating Entity Relationship Diagram.
+I am Inspired by real-world E-learning platforms.
 
-<!-- ACKNOWLEDGEMENTS -->
+# ❓ FAQ (OPTIONAL)<a name="faq"></a>
 
-## 🙏 Acknowledgments <a name="acknowledgements"></a>
+- Q: Can I run this without Supabase? A: Yes, just use PostgreSQL locally and run schema.sql.
 
-> Give credit to everyone who inspired your codebase.
 
-I would like to thank...
+### 📝 **License**<a name="license"></a>
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+This project is licensed under the [MIT License](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository)
 
-<!-- FAQ (optional) -->
+NOTE: we recommend using the MIT license - you can set it up quickly by using templates available on GitHub. You can also use any other license if you wish.
 
-## ❓ FAQ (OPTIONAL) <a name="faq"></a>
-
-> Add at least 2 questions new developers would ask when they decide to use your project.
-
-- **[Question_1]**
-
-  - [Answer_1]
-
-- **[Question_2]**
-
-  - [Answer_2]
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- LICENSE -->
-
-## 📝 License <a name="license"></a>
-
-This project is [MIT](./LICENSE) licensed.
-
-_NOTE: we recommend using the [MIT license](https://choosealicense.com/licenses/mit/) - you can set it up quickly by [using templates available on GitHub](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository). You can also use [any other license](https://choosealicense.com/licenses/) if you wish._
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
