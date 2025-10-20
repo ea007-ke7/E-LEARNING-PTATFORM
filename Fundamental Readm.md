@@ -62,70 +62,51 @@ ALTER TABLE quizzes ENABLE ROW LEVEL SECURITY;
 \`\`\`
 4. Apply user vs instructor vs admin policies as below.
 
+<img width="903" height="326" alt="image" src="https://github.com/user-attachments/assets/ac441b88-fe39-4c9d-8be6-b5406c1afa38" />
+
 ## 💾 Sample SQL Queries & Policies <a name="sample-sql-queries"></a>
-### 1️⃣ Learner Policies
+### 1️⃣ Users Policies
 \`\`\`sql
--- Learners can view and enroll in courses
-CREATE POLICY "Learners can view all courses"
+-- restricted access (users can only read and insert their own data)
+CREATE POLICY "Users can view own student record"
+ON students
+FOR SELECT
+USING (auth.uid() = auth_id);
+
+-- Users can update their own record
+CREATE POLICY "Users can update own student record"
+ON students
+FOR UPDATE
+USING (auth.uid() = auth_id)
+WITH CHECK (auth.uid() = auth_id);
+
+-- Everyone can view courses
+CREATE POLICY "All users can view courses"
 ON courses
 FOR SELECT
 USING (true);
-
--- Learners can only manage their own enrollments
-CREATE POLICY "Learners manage their own enrollments"
-ON enrollments
-FOR ALL
-USING (auth.uid() = learner_uuid);
-
--- Learners can attempt quizzes they are enrolled in
-CREATE POLICY "Learners can view assigned quizzes"
-ON quizzes
-FOR SELECT
-USING (EXISTS (
-  SELECT 1 FROM enrollments e 
-  WHERE e.course_id = quizzes.course_id 
-  AND e.learner_uuid = auth.uid()
-));
 \`\`\`
 
-### 2️⃣ Instructor Policies
+### 2️⃣  Admin Policies
+
 \`\`\`sql
--- Instructors can manage their own created courses
-CREATE POLICY "Instructors manage their courses"
+-- Admins can manage (insert, update, delete) all courses
+CREATE POLICY "Admins manage all courses"
 ON courses
 FOR ALL
-USING (auth.uid() = instructor_uuid);
+USING (
+  EXISTS (
+    SELECT 1 FROM users WHERE id = auth.uid() AND role = 'admin'
+  ));
 
--- Instructors can view learners enrolled in their courses
-CREATE POLICY "Instructors view enrolled learners"
+-- Admins can manage all enrollments
+CREATE POLICY "Admins full access to enrollments"
 ON enrollments
-FOR SELECT
-USING (EXISTS (
-  SELECT 1 FROM courses c 
-  WHERE c.course_id = enrollments.course_id 
-  AND c.instructor_uuid = auth.uid()
-));
-
--- Instructors can create and update quizzes in their own courses
-CREATE POLICY "Instructors manage quizzes"
-ON quizzes
 FOR ALL
-USING (EXISTS (
-  SELECT 1 FROM courses c 
-  WHERE c.course_id = quizzes.course_id 
-  AND c.instructor_uuid = auth.uid()
-));
-\`\`\`
-
-### 3️⃣ Admin Policies
-\`\`\`sql
--- Admins can manage all users, courses, and enrollments
-CREATE POLICY "Admins manage all users"
-ON users
-FOR ALL
-USING (EXISTS (
-  SELECT 1 FROM users u WHERE u.user_uuid = auth.uid() AND u.role = 'admin'
-));
+USING (
+  EXISTS (
+    SELECT 1 FROM users WHERE id = auth.uid() AND role = 'admin'
+  ));
 
 CREATE POLICY "Admins manage all courses"
 ON courses
@@ -144,33 +125,58 @@ USING (EXISTS (
 \`\`\`
 
 ## 🧠 Example Queries and Outputs
-### Learner View
-\`\`\`sql
-SELECT c.title AS course, i.full_name AS instructor
-FROM enrollments e
-JOIN courses c ON e.course_id = c.course_id
-JOIN users i ON c.instructor_uuid = i.user_uuid
-WHERE e.learner_uuid = '2d953804-5827-4f73-bfd5-41d83d53762f';
-\`\`\`
 
-### Instructor Creating a Course
+### Admin Can View all Courses
 \`\`\`sql
-INSERT INTO courses (course_id, title, description, instructor_uuid)
-VALUES (10, 'Data Ethics 101', 'Introduction to ethical data use.', auth.uid());
+-- Admin can view all students
+SELECT id, name 
+FROM students;
 \`\`\`
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/9c929974-ab62-495a-969c-51898e7f5132" />
 
 ### Admin Updating a Course
 \`\`\`sql
 UPDATE courses SET title = 'Data Science Fundamentals' WHERE course_id = 1;
+
+-- Admin can Insert New Courses
+INSERT INTO courses (title, description)
+VALUES ('Multimedia', 'learn HTML');
+
+-- Output after Inserting a New Course
+SELECT * FROM courses;
+
+-- Admin can Delete Courses
+DELETE FROM courses
+WHERE title = 'Multimedia';
+
+-- Output after Deleting a Course
+DELETE FROM courses
+WHERE title = 'Multimedia'
+
+**Student Queries and Output**
+-- Students can view their coursemates
+SELECT c.title, s.name AS student_name, e.enrolled_at
+FROM enrollments e
+JOIN students s ON e.student_id = s.id
+JOIN courses c ON e.course_id = c.id
+WHERE c.title = 'SQL Basics';
+
+--Students can browse what courses exist.
+SELECT id, title, description
+FROM courses
+ORDER BY created_at;
 \`\`\`
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/d3296562-c981-48e6-9aec-f77aacee5782" />
+
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/7e778970-6df8-40c8-8b0b-321685d0bed5" />
 
 ## 🛡 Security Notes <a name="security-notes"></a>
 Full RLS, role enforcement, and function details available in 👉 **security_notes.md**
 
 ## 👥 Authors <a name="authors"></a>
-**Dennis Murithi**  
-GitHub: [@dennismurithi](https://github.com/dennismurithi)  
-LinkedIn: Dennis Murithi
+**Edith Adikinyi**  
+GitHub: [@](https://github.com/)  
+LinkedIn: 
 
 ## 🔭 Future Features <a name="future-features"></a>
 - Integrate with front-end E-Learning dashboard  
