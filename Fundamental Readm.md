@@ -170,6 +170,7 @@ FROM students;
 INSERT INTO courses (title, description)
 VALUES ('Multimedia', 'learn HTML');
 ```
+```sql
 SELECT * FROM courses;
 ```
 Output after Inserting a New Course
@@ -180,6 +181,7 @@ Output after Inserting a New Course
 ```sql
 DELETE FROM courses
 WHERE title = 'Multimedia';
+```
 
 -- Output after Deleting a Course
 <img width="1161" height="635" alt="Capture ii" src="https://github.com/user-attachments/assets/2a4c49dc-b65c-4cb9-a664-000830072741" />
