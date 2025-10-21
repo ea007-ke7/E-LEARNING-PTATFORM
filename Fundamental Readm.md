@@ -169,17 +169,20 @@ FROM students;
 -- Admin can Insert New Courses
 INSERT INTO courses (title, description)
 VALUES ('Multimedia', 'learn HTML');
-
--- Output after Inserting a New Course
+```
 SELECT * FROM courses;
+```
+Output after Inserting a New Course
 
 <img width="856" height="531" alt="Capture 3" src="https://github.com/user-attachments/assets/6800b64a-0e95-4a85-a3cd-a1b63f2f4bb5" />
 
 -- Admin can Delete Courses
+```sql
 DELETE FROM courses
 WHERE title = 'Multimedia';
 
 -- Output after Deleting a Course
+<img width="1161" height="635" alt="Capture ii" src="https://github.com/user-attachments/assets/2a4c49dc-b65c-4cb9-a664-000830072741" />
 
 
 ## 🛡 Security Notes <a name="security-notes"></a>
