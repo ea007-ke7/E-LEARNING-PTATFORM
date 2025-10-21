@@ -153,7 +153,7 @@ SELECT id, title, description
 FROM courses
 ORDER BY created_at;
 ```
-<img width="1366" height="768" alt="Capture 4" src="https://github.com/user-attachments/assets/aa522025-6a1a-42b7-9a52-06e350a773d2" />
+<img width="1186" height="645" alt="Capture i" src="https://github.com/user-attachments/assets/c2cc1699-b98c-4b4e-9137-526940208058" />
 
 ### Admin Can View all Students
 ```sql
