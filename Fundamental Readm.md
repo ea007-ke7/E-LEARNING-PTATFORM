@@ -161,7 +161,8 @@ ORDER BY created_at;
 SELECT id, name 
 FROM students;
 ```
-<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/9c929974-ab62-495a-969c-51898e7f5132" />
+<img width="1107" height="579" alt="Capture 2" src="https://github.com/user-attachments/assets/de45c463-868a-47b8-b77b-bd75c92176a8" />
+
 
 ### Admin Updating a Course
 ```sql
@@ -172,15 +173,14 @@ VALUES ('Multimedia', 'learn HTML');
 -- Output after Inserting a New Course
 SELECT * FROM courses;
 
-<img width="1366" height="768" alt="Capture 3" src="https://github.com/user-attachments/assets/177563e0-4389-4d76-b303-87ef5315a1b3" />
+<img width="856" height="531" alt="Capture 3" src="https://github.com/user-attachments/assets/6800b64a-0e95-4a85-a3cd-a1b63f2f4bb5" />
 
 -- Admin can Delete Courses
 DELETE FROM courses
 WHERE title = 'Multimedia';
 
 -- Output after Deleting a Course
-DELETE FROM courses
-WHERE title = 'Multimedia'
+
 
 ## 🛡 Security Notes <a name="security-notes"></a>
 Full RLS, role enforcement, and function details available in 👉 **security_notes.md**
