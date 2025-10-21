@@ -148,6 +148,7 @@ JOIN students s ON e.student_id = s.id
 JOIN courses c ON e.course_id = c.id
 WHERE c.title = 'SQL Basics';
 ```
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/d3296562-c981-48e6-9aec-f77aacee5782" />
 
 ```sql
 --Students can browse what courses exist.
@@ -155,14 +156,14 @@ SELECT id, title, description
 FROM courses
 ORDER BY created_at;
 ```
+<img width="1366" height="768" alt="Capture 4" src="https://github.com/user-attachments/assets/aa522025-6a1a-42b7-9a52-06e350a773d2" />
 
-### Admin Can View all Courses
+### Admin Can View all Students
 ```sql
 -- Admin can view all students
 SELECT id, name 
 FROM students;
 ```
-
 <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/9c929974-ab62-495a-969c-51898e7f5132" />
 
 ### Admin Updating a Course
@@ -176,6 +177,8 @@ VALUES ('Multimedia', 'learn HTML');
 -- Output after Inserting a New Course
 SELECT * FROM courses;
 
+<img width="1366" height="768" alt="Capture 3" src="https://github.com/user-attachments/assets/177563e0-4389-4d76-b303-87ef5315a1b3" />
+
 -- Admin can Delete Courses
 DELETE FROM courses
 WHERE title = 'Multimedia';
@@ -183,10 +186,6 @@ WHERE title = 'Multimedia';
 -- Output after Deleting a Course
 DELETE FROM courses
 WHERE title = 'Multimedia'
-
-
-\`\`\`
-<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/d3296562-c981-48e6-9aec-f77aacee5782" />
 
 <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/7e778970-6df8-40c8-8b0b-321685d0bed5" />
 
@@ -219,7 +218,7 @@ Give a ⭐️ if you like this project and found it helpful!
 **A:** Yes — use Supabase Auth + APIs with Next.js or React front-end.
 
 **Q:** How do I test policies?  
-**A:** Log in as Admin, Instructor, or Learner and perform CRUD operations in Supabase SQL Editor.
+**A:** Log in as Admin, or User and perform CRUD operations in Supabase SQL Editor.
 
 ## 📝 License <a name="license"></a>
-This project is licensed under the **MIT License** — see the LICENSE file for detai
+This project is licensed under the **MIT License** — see the LICENSE file for details
