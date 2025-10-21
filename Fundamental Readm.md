@@ -48,7 +48,7 @@ It demonstrates:
 ### Prerequisites
 - Supabase account  
 - Basic knowledge of SQL and PostgreSQL  
-- Git installed  
+- Github  
 
 ### Setup
 
@@ -192,8 +192,9 @@ Full RLS, role enforcement, and function details available in 👉 **security_no
 
 ## 👥 Authors <a name="authors"></a>
 **Edith Adikinyi**  
-GitHub: [@](https://github.com/)  
-LinkedIn: 
+GitHub: [@ea007-ke7](https://github.com/ea007-ke7)  
+LinkedIn: [Edith Othieno](https://www.linkedin.com/in/edith-othieno7)
+
 
 ## 🔭 Future Features <a name="future-features"></a>
 - Integrate with front-end E-Learning dashboard  
