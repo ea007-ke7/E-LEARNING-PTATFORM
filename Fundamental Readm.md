@@ -164,9 +164,7 @@ FROM students;
 <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/9c929974-ab62-495a-969c-51898e7f5132" />
 
 ### Admin Updating a Course
-\`\`\`sql
-UPDATE courses SET title = 'Data Science Fundamentals' WHERE course_id = 1;
-
+```sql
 -- Admin can Insert New Courses
 INSERT INTO courses (title, description)
 VALUES ('Multimedia', 'learn HTML');
@@ -183,8 +181,6 @@ WHERE title = 'Multimedia';
 -- Output after Deleting a Course
 DELETE FROM courses
 WHERE title = 'Multimedia'
-
-<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/7e778970-6df8-40c8-8b0b-321685d0bed5" />
 
 ## 🛡 Security Notes <a name="security-notes"></a>
 Full RLS, role enforcement, and function details available in 👉 **security_notes.md**
