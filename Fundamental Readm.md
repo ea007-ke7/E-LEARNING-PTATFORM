@@ -59,30 +59,27 @@ cd music-streaming-database
 
 ```bash
 
-
-### Usage
 Usage
 
-1. Open Supabase SQL Editor  
-2. Run `schema.sql` to create tables and seed data  
-3. Apply RLS policies:
-```
-ALTER TABLE students ENABLE ROW LEVEL SECURITY;
-ALTER TABLE courses ENABLE ROW LEVEL SECURITY;
-ALTER TABLE enrollments ENABLE ROW LEVEL SECURITY;
+Open Supabase SQL editor
+
+Run schema.sql to create tables & sample data
+
+Apply RLS policies:
+
+ALTER TABLE user_favorites ENABLE ROW LEVEL SECURITY;
+ALTER TABLE songs ENABLE ROW LEVEL SECURITY;
+ALTER TABLE artists ENABLE ROW LEVEL SECURITY;
+
 
 Apply user vs admin policies.
 ```
 
 ---
 
-4. Apply user vs instructor vs admin policies as below.
-
-<img width="903" height="326" alt="image" src="https://github.com/user-attachments/assets/ac441b88-fe39-4c9d-8be6-b5406c1afa38" />
-
 ## 💾 Sample SQL Queries & Policies <a name="sample-sql-queries"></a>
 
-### 1️⃣ **User Policies**
+### 1️⃣ User Policies
 ```sql
 -- Users can only read their own data
 CREATE POLICY "Users can view own student record"
