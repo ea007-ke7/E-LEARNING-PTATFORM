@@ -21,22 +21,28 @@
 - [📝 License](#license)
 
 ## 📖 About the Project <a name="about-project"></a>
-This project models an E-Learning Platform database using Supabase and PostgreSQL, with focus on Admin, Instructor, and Learner roles enforced through Row Level Security (RLS).
+This project models an E-Learning Platform database using Supabase and PostgreSQL, with focus on Admin, and User roles enforced through Row Level Security (RLS).
 
 It demonstrates:
-- ✅ Role-based access control (Admin, Instructor, Learner)
+- ✅ Role-based access control (Admin, Users )
 - ✅ Secure CRUD operations via RLS
 - ✅ Enrolled course management per user
 - ✅ Policies for content creation and evaluation
 - ✅ SQL validation and tested outputs from Supabase
 
 ## 🛠 Built With <a name="built-with"></a>
-- Supabase Dashboard – SQL editor, authentication & policies  
-- PostgreSQL – database, functions, and triggers  
-- RLS Policies – secure access control at table level  
+
+- **Supabase Dashboard** – SQL editor, authentication & policies 
+- **PostgreSQL** – database and tables  
+- **RLS Policies & Functions** – enforce admin/user restrictions  
+
+---
 
 ## 🚀 Live Demo <a name="live-demo"></a>
-- Supabase Dashboard
+
+- [Supabase Dashboard](https://app.supabase.com)  
+
+---
 
 ## 💻 Getting Started <a name="getting-started"></a>
 ### Prerequisites
@@ -45,93 +51,118 @@ It demonstrates:
 - Git installed  
 
 ### Setup
-\`\`\`bash
-git clone https://github.com/DENNIS-MURITHI/e-learning-database.git
-cd e-learning-database
-\`\`\`
+
+```bash
+git clone https://github.com/ea007-ke7/E-LEARNING-PTATFORM-database.git
+cd music-streaming-database
+```
+
+```bash
+
 
 ### Usage
+Usage
+
 1. Open Supabase SQL Editor  
 2. Run `schema.sql` to create tables and seed data  
 3. Apply RLS policies:
-\`\`\`sql
-ALTER TABLE users ENABLE ROW LEVEL SECURITY;
+```
+ALTER TABLE students ENABLE ROW LEVEL SECURITY;
 ALTER TABLE courses ENABLE ROW LEVEL SECURITY;
 ALTER TABLE enrollments ENABLE ROW LEVEL SECURITY;
-ALTER TABLE quizzes ENABLE ROW LEVEL SECURITY;
-\`\`\`
+
+Apply user vs admin policies.
+```
+
+---
+
 4. Apply user vs instructor vs admin policies as below.
 
 <img width="903" height="326" alt="image" src="https://github.com/user-attachments/assets/ac441b88-fe39-4c9d-8be6-b5406c1afa38" />
 
 ## 💾 Sample SQL Queries & Policies <a name="sample-sql-queries"></a>
-### 1️⃣ Users Policies
-\`\`\`sql
--- restricted access (users can only read and insert their own data)
+
+### 1️⃣ **User Policies**
+```sql
+-- Users can only read their own data
 CREATE POLICY "Users can view own student record"
 ON students
 FOR SELECT
 USING (auth.uid() = auth_id);
+```
 
+```sql
 -- Users can update their own record
 CREATE POLICY "Users can update own student record"
 ON students
 FOR UPDATE
 USING (auth.uid() = auth_id)
 WITH CHECK (auth.uid() = auth_id);
+```
 
+```sql
 -- Everyone can view courses
 CREATE POLICY "All users can view courses"
 ON courses
 FOR SELECT
 USING (true);
-\`\`\`
+```
 
+---
 ### 2️⃣  Admin Policies
 
-\`\`\`sql
+```sql
+-- Admins have full access (read, insert, update, delete)
+CREATE POLICY "Admins full access to students"
+ON students
+FOR ALL
+USING (EXISTS (SELECT 1 FROM users WHERE id = auth.uid() AND role = 'admin'));
+```
+
+```sql
 -- Admins can manage (insert, update, delete) all courses
 CREATE POLICY "Admins manage all courses"
 ON courses
 FOR ALL
-USING (
-  EXISTS (
-    SELECT 1 FROM users WHERE id = auth.uid() AND role = 'admin'
-  ));
+USING (EXISTS (SELECT 1 FROM users WHERE id = auth.uid() AND role = 'admin'));
+```
 
+```sql
 -- Admins can manage all enrollments
 CREATE POLICY "Admins full access to enrollments"
 ON enrollments
 FOR ALL
-USING (
-  EXISTS (
-    SELECT 1 FROM users WHERE id = auth.uid() AND role = 'admin'
-  ));
+USING (EXISTS (SELECT 1 FROM users WHERE id = auth.uid() AND role = 'admin'));
+```
 
-CREATE POLICY "Admins manage all courses"
-ON courses
-FOR ALL
-USING (EXISTS (
-  SELECT 1 FROM users u WHERE u.user_uuid = auth.uid() AND u.role = 'admin'
-));
+---
 
+### 3️⃣ Example CRUD Queries with their output.
 
-CREATE POLICY "Admins manage all enrollments"
-ON enrollments
-FOR ALL
-USING (EXISTS (
-  SELECT 1 FROM users u WHERE u.user_uuid = auth.uid() AND u.role = 'admin'
-));
-\`\`\`
+**Student Queries and Output**
+```sql
+-- Students can view their coursemates
+SELECT c.title, s.name AS student_name, e.enrolled_at
+FROM enrollments e
+JOIN students s ON e.student_id = s.id
+JOIN courses c ON e.course_id = c.id
+WHERE c.title = 'SQL Basics';
+```
 
-## 🧠 Example Queries and Outputs
+```sql
+--Students can browse what courses exist.
+SELECT id, title, description
+FROM courses
+ORDER BY created_at;
+```
 
 ### Admin Can View all Courses
-\`\`\`sql
+```sql
 -- Admin can view all students
 SELECT id, name 
 FROM students;
-\`\`\`
+```
+
 <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/9c929974-ab62-495a-969c-51898e7f5132" />
 
 ### Admin Updating a Course
@@ -153,18 +184,7 @@ WHERE title = 'Multimedia';
 DELETE FROM courses
 WHERE title = 'Multimedia'
 
-**Student Queries and Output**
--- Students can view their coursemates
-SELECT c.title, s.name AS student_name, e.enrolled_at
-FROM enrollments e
-JOIN students s ON e.student_id = s.id
-JOIN courses c ON e.course_id = c.id
-WHERE c.title = 'SQL Basics';
 
---Students can browse what courses exist.
-SELECT id, title, description
-FROM courses
-ORDER BY created_at;
 \`\`\`
 <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/d3296562-c981-48e6-9aec-f77aacee5782" />
 
