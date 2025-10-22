@@ -24,11 +24,11 @@
 This project models an E-Learning Platform database using Supabase and PostgreSQL, with focus on Admin, and User roles enforced through Row Level Security (RLS).
 
 It demonstrates:
-- ✅ Role-based access control (Admin, Users )
-- ✅ Secure CRUD operations via RLS
-- ✅ Enrolled course management per user
-- ✅ Policies for content creation and evaluation
-- ✅ SQL validation and tested outputs from Supabase
+✅ Role-based access control (Admin, Users )
+✅ Secure CRUD operations via RLS
+✅ Enrolled course management per user
+✅ Policies for content creation and evaluation
+✅ SQL validation and tested outputs from Supabase
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -54,7 +54,7 @@ It demonstrates:
 
 ```bash
 git clone https://github.com/ea007-ke7/E-LEARNING-PTATFORM-database.git
-cd music-streaming-database
+cd E-LEARNING-database
 ```
 
 ```bash
@@ -189,7 +189,7 @@ WHERE title = 'Multimedia';
 
 ## 🛡 Security Notes <a name="security-notes"></a>
 
-Full explanation of RLS, policies, and admin functions available in 👉 [security_notes.md](https://github.com/DENNIS-MURITHI/Data-Fundamentals/blob/data_test_branch/security_notes.md)
+Full explanation of RLS, policies, and admin functions available in 👉 [security_notes.md](https://https://github.com/ea007-ke7/E-LEARNING-PTATFORM/blob/Test_tool/Data%20Fundamentals%20security_notes.md)
 
 ---
 
