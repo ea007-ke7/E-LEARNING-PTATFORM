@@ -189,7 +189,7 @@ WHERE title = 'Multimedia';
 
 ## 🛡 Security Notes <a name="security-notes"></a>
 
-Full explanation of RLS, policies, and admin functions available in 👉 [security_notes.md](https://https://github.com/ea007-ke7/E-LEARNING-PTATFORM/blob/Test_tool/Data%20Fundamentals%20security_notes.md)
+Full explanation of RLS, policies, and admin functions available in 👉 [security_notes.md](https://github.com/ea007-ke7/E-LEARNING-PTATFORM/blob/Test_tool/Data%20Fundamentals%20security_notes.md)
 
 ---
 
