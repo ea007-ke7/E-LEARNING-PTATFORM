@@ -1,4 +1,4 @@
-# 📖 Data Fundamentals: Admin, Instructor & Learner Roles in E-Learning Platform
+# 📖 Data Fundamentals: Admin, & User Roles in E-Learning Platform
 <div align="center">
   <img width="314" height="285" alt="Supabase Logo" src="https://github.com/user-attachments/assets/20661293-a214-4004-9042-657102fb0710" />
   <br/>
