@@ -188,7 +188,10 @@ WHERE title = 'Multimedia';
 
 
 ## 🛡 Security Notes <a name="security-notes"></a>
-Full RLS, role enforcement, and function details available in 👉 **security_notes.md**
+
+Full explanation of RLS, policies, and admin functions available in 👉 [security_notes.md](https://github.com/DENNIS-MURITHI/Data-Fundamentals/blob/data_test_branch/security_notes.md)
+
+---
 
 ## 👥 Authors <a name="authors"></a>
 **Edith Adikinyi**  
