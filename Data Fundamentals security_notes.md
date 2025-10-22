@@ -24,19 +24,11 @@ SELECT id, name, role FROM users WHERE id = auth.uid();
 
 ------------------------------------------------------------------------
 
-## 🔒 Row Level Security (RLS)
+👥 3. **Roles & Permissions**
 
-RLS ensures **least privilege access**. It restricts what each role
-(User/Admin) can read, insert, update, or delete.
-It also Prevent unauthorized data exposure between us
+Admin	have **Full access (SELECT, INSERT, UPDATE, DELETE)**	Can manage all students, courses, and enrollments
+Student/User have	Limited access	Can only view courses and manage their own enrollment and profile
 
-RLS is enabled on all key tables:
-
-``` sql
-ALTER TABLE students ENABLE ROW LEVEL SECURITY;
-ALTER TABLE courses ENABLE ROW LEVEL SECURITY;
-ALTER TABLE enrollments ENABLE ROW LEVEL SECURITY;
-```
 
 ------------------------------------------------------------------------
 
@@ -45,24 +37,25 @@ ALTER TABLE enrollments ENABLE ROW LEVEL SECURITY;
 Normal users have restricted access.
 
 ``` sql
--- View only their own favorites
-CREATE POLICY "Users can view their own favorites"
-ON user_favorites
+-- View own student record
+CREATE POLICY "Users can view own student record"
+ON students
 FOR SELECT
-USING (auth.uid() = user_uuid);
+USING (auth.uid() = auth_id);
 
--- Insert only their own favorites
-CREATE POLICY "Users can insert their own favorites"
-ON user_favorites
-FOR INSERT
-WITH CHECK (auth.uid() = user_uuid);
+-- Update own student record
+CREATE POLICY "Users can update own student record"
+ON students
+FOR UPDATE
+USING (auth.uid() = auth_id)
+WITH CHECK (auth.uid() = auth_id);
 
--- Read all songs & artists
-CREATE POLICY "Users can read all songs"
-ON songs FOR SELECT USING (true);
+-- All users can view available courses
+CREATE POLICY "All users can view courses"
+ON courses
+FOR SELECT
+USING (true);
 
-CREATE POLICY "Users can read all artists"
-ON artists FOR SELECT USING (true);
 ```
 
 ------------------------------------------------------------------------
@@ -72,20 +65,24 @@ ON artists FOR SELECT USING (true);
 Admins have **full access**.
 
 ``` sql
-CREATE POLICY "Admins can manage all favorites"
-ON user_favorites
+-- Full access to students
+CREATE POLICY "Admins full access to students"
+ON students
 FOR ALL
-USING (EXISTS (SELECT 1 FROM users WHERE user_uuid = auth.uid() AND role = 'admin'));
+USING (EXISTS (SELECT 1 FROM users WHERE id = auth.uid() AND role = 'admin'));
 
-CREATE POLICY "Admins can manage all songs"
-ON songs
+-- Manage all courses
+CREATE POLICY "Admins manage all courses"
+ON courses
 FOR ALL
-USING (EXISTS (SELECT 1 FROM users WHERE user_uuid = auth.uid() AND role = 'admin'));
+USING (EXISTS (SELECT 1 FROM users WHERE id = auth.uid() AND role = 'admin'));
 
-CREATE POLICY "Admins can manage all artists"
-ON artists
+-- Manage all enrollments
+CREATE POLICY "Admins full access to enrollments"
+ON enrollments
 FOR ALL
-USING (EXISTS (SELECT 1 FROM users WHERE user_uuid = auth.uid() AND role = 'admin'));
+USING (EXISTS (SELECT 1 FROM users WHERE id = auth.uid() AND role = 'admin'));
+
 ```
 
 ------------------------------------------------------------------------
@@ -94,43 +91,45 @@ USING (EXISTS (SELECT 1 FROM users WHERE user_uuid = auth.uid() AND role = 'admi
 
 ### ✅ User Tests
 
-1.  **SELECT own favorites** (works)\
-2.  **INSERT a favorite** (works)\
-3.  **UPDATE a favorite** (blocked)\
-4.  **DELETE a favorite** (blocked)
+1.  **SELECT all courses** (works)\
+2.  **INSERT own enrollment** (works)\
+3.  **UPDATE another student record** (denied)\
+4.  **DELETE a course** (denied)
 
 ### ✅ Admin Tests
 
-1.  **SELECT all favorites** (works)\
-2.  **UPDATE songs** (works)\
-3.  **DELETE artists** (works)
+1.  **SELECT all students** (works)\
+2.  **INSERT courses** (works)\
+3.  **DELETE any course** (works)
 
 ------------------------------------------------------------------------
 
-<img width="1355" height="682" alt="image" src="https://github.com/user-attachments/assets/da1574ed-80b1-4900-98c2-e803ab3d1d35"/>
+<img width="1363" height="654" alt="Capture iii" src="https://github.com/user-attachments/assets/5d1c4c68-5dad-44bd-9c4d-c41b172d9e03" />
 
 
 ## 🛠 Admin-only Function
 
-Example: Admin deletes a project or song safely.
+Example:  Admin-only course deletion
 
 ``` sql
-CREATE OR REPLACE FUNCTION delete_song_safe(song_id INT)
-RETURNS VOID
-LANGUAGE SQL
+CREATE OR REPLACE FUNCTION delete_course(course_id uuid)
+RETURNS void
+LANGUAGE sql
 SECURITY DEFINER
 AS $$
-  DELETE FROM songs WHERE song_id = $1;
+  DELETE FROM courses WHERE id = course_id;
 $$;
+
 ```
+[] SECURITY DEFINER allows the function to execute with the privileges of its creator (admin).
+[] Access is restricted via a policy to users with role = 'admin'.
 
 ------------------------------------------------------------------------
 
-<img width="1331" height="326" alt="image" src="https://github.com/user-attachments/assets/ca9f8afe-9e25-4293-95fd-0d5a34941ad2"/>
-
+<img width="1343" height="581" alt="Capture vi" src="https://github.com/user-attachments/assets/4a9a6fed-ff85-4498-a0ad-ce1f15b55d8f" />
 
 ## 📎 Reference
 
 -   Linked to [README.md](README.md)
 -   [Supabase Policies:](https://supabase.com/docs/guides/database/postgres/row-level-security)
-  
+  https://supabase.com/dashboard/project/mhsnciubwnzincjbnpxj/sql
