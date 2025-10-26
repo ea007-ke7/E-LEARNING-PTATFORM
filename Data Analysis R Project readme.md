@@ -100,7 +100,7 @@ Clone the repository:
 git clone https://github.com/edithothieno/e-learning-platform.git
 cd e-learning-platform
 
-Usage
+### Usage
 
 Open your Supabase project, navigate to SQL Editor, and run:
 
@@ -119,16 +119,19 @@ install.packages(c("DBI", "RPostgres", "dplyr", "ggplot2"))
 Create a file connect_db.R:
 
 library(DBI)
-connect_db <- function() {
-  dbConnect(
+library(RPostgres)
+
+analysis <- function() {
+  con <- dbConnect(
     RPostgres::Postgres(),
+    host = "aws-1-eu-north-1.pooler.supabase.com",
+    port = 6543,
     dbname = "postgres",
-    host = "yourproject.supabase.co",
-    port = 5432,
-    user = "postgres",
-    password = "YOUR_PASSWORD",
+    user = "postgres.mhsnciubwnzincjbnpxj",
+    password = "cccccc",
     sslmode = "require"
   )
+  return(con)
 }
 
 
@@ -139,7 +142,7 @@ con <- connect_db()
 dbListTables(con)
 
 
-✅ Output:
+# Outcome after establishing connection
 
 [1] "students" "courses" "enrollments"
 
