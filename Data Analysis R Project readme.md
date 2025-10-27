@@ -144,7 +144,8 @@ dbListTables(con)
 
 # Outcome after establishing connection
 
-[1] "students" "courses" "enrollments"
+<img width="1362" height="679" alt="Connect R" src="https://github.com/user-attachments/assets/aefb746d-764c-4c6d-b1a2-8359a21508b9" />
+
 
 💾 Schema SQL <a name="schema-sql"></a>
 <details> <summary>Click to expand the full schema</summary>
