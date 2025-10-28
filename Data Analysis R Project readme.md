@@ -398,7 +398,7 @@ ggplot(trend_data, aes(x = enrollment_date, y = total_enrollments)) +
 
 👤 **Edith Adikinyi**
 
-* GitHub: [@ea007-ke7]((https://github.com/ea007-ke7/E-LEARNING-PTATFORM))
+* GitHub: [@ea007-ke7](https://github.com/ea007-ke7/E-LEARNING-PTATFORM/blob/Test_tool/Data%20Analysis%20R%20Project%20readme.md)
 * LinkedIn: [LinkedIn](https:www.linkedin.com/in/edith-othieno7)
 
 <p align="right"><a href="#about-project">back to top</a></p>
@@ -408,6 +408,7 @@ ggplot(trend_data, aes(x = enrollment_date, y = total_enrollments)) +
 # 🔭 Future Features <a name="future-features"></a>
 
 * Add courses grades and attendance tracking
+* Add instructors table
 * Include admin dashboard analytics in R or React
 * Allow file uploads and progress visualization
 * Add email notifications via Supabase Edge Functions
