@@ -119,30 +119,35 @@ cd e-learning-platform
 source("connect_db.R")
 con <- connect_db()
 
-# Run your query
+# Total students per course
 query <- "
-  SELECT u.username, s.title, a.name AS artist_name
-  FROM user_favorites uf
-  JOIN users u ON uf.user_id = u.user_id
-  JOIN songs s ON uf.song_id = s.song_id
-  JOIN artists a ON s.artist_id = a.artist_id
-  WHERE u.username = 'alice';
+  SELECT c.title AS course_title,
+  COUNT(e.student_id) AS total_students
+  FROM courses c
+  LEFT JOIN enrollments e ON c.id = e.course_id
+  GROUP BY c.title
+  ORDER BY total_students DESC;
 "
 
 # Execute query and store results
-alice_favorites <- dbGetQuery(con, query)
+course_enrollments <- dbGetQuery(con, query)
 
 # View results
-print(alice_favorites)
-#outome : 
-# source("/cloud/project/alice_favorite.R")
-#username              title artist_name
-#1    alice Programmers choice   Sauti Sol
+print(course_enrollments)
+
+# Example output:
+#   course_title               total_students
+# 1 SQL Basics                           2
+# 2 Python for Beginners                 1
+# 3 Web Development 101                  1
+# 4 Intro to Machine Learning            1
+# 5 Data Analysis with SQL               0
 
 ```
 # Outcome upon running the code
 
-<img width="1366" height="634" alt="image" src="https://github.com/user-attachments/assets/586fef26-f522-47cc-9531-11af15845984" />
+<img width="1359" height="682" alt="enrollments per courses" src="https://github.com/user-attachments/assets/7d043e13-ed1a-4cb2-8227-159105993c5d" />
+
 ---
 
 ### Connecting from Posit to Supabase <a name="posit-supabase-connection"></a>
@@ -247,6 +252,7 @@ INSERT INTO enrollments (student_id, course_id, enrolled_at) VALUES
 (4, 5, '2025-09-09 13:45:00');
 
 -- Example query
+```sql
 SELECT * courses;
 ```
 
@@ -382,7 +388,7 @@ ggplot(trend_data, aes(x = enrollment_date, y = total_enrollments)) +
 
 # 📖 Data Dictionary <a name="data-dictionary"></a>
 
-**📖 Full Data Dictionary:** [Check it here](https://github.com/DENNIS-MURITHI/Data-Tools/blob/test_branch/data_dictionary.md)
+**📖 Full Data Dictionary:** [Check it here](https://github.com/ea007-ke7/E-LEARNING-PTATFORM/blob/Test_tool/Data%20Analysis%20Data%20Dictionary.md)
 
 <p align="right"><a href="#about-project">back to top</a></p>
 
