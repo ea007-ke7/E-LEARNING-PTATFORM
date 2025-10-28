@@ -32,7 +32,7 @@
 
 # 📖 About the Project <a name="about-project"></a>
 
-> This project models an **E-Learning Platform** database. It includes **students**, **courses**, and **enrollments** tables. The project allows tracking which students enroll in which courses, and enforcing security roles (Admin vs. User) using Supabase row-level security policies.  
+> This project models an **E-Learning Platform** backend database. It includes **students**, **courses**, and **enrollments** tables. The project allows tracking which students enroll in which courses, and enforcing security roles (Admin vs. User) using Supabase row-level security policies.  
 > The project integrates **R/Posit** for querying, analyzing, and visualizing academic and enrollment data.
 
 ---
