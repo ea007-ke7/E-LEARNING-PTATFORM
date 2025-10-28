@@ -164,6 +164,7 @@ print(users)
 
 Example:
 
+```r
 # Total students per course
 query <- "
 SELECT c.title AS course_title,
@@ -191,12 +192,6 @@ trend_data <- dbGetQuery(con, query_trend)
 # View results in console
 print(trend_data)
 
-library(ggplot2)
-
-ggplot(course_data, aes(x = reorder(course_title, -total_students), y = total_students, fill = course_title)) +
-  geom_bar(stat = "identity") + theme_minimal() + labs(title = "Number of Students Enrolled per Course",
-       x = "Course Title", y = "Total Students") + theme(axis.text.x = element_text(angle = 30, hjust = 1),
-        legend.position = "none")""")
 ```
 
 ---
