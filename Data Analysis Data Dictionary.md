@@ -204,9 +204,13 @@ ggplot(course_data, aes(x = reorder(course_title, -total_students), y = total_st
 ## Maintainer
 
 **Author**: **Edith Adikinyi**
-**Repository**: E-Learning Platform on GitHub
+
+**Repository**:[ E-Learning Platform on GitHub](https://github.com/ea007-ke7/E-LEARNING-PTATFORM/edit/Test_tool/Data%20Analysis%20R%20Project%20readme.md)
+
 **Database**: [Supabase (PostgreSQL)](https://supabase.com/dashboard/project/mhsnciubwnzincjbnpxj/sql/84e4c0de-e88e-4856-b5f2-437275cec772)
+
 **Visualization**: [ R / Posit Cloud (ggplot2, dplyr, DBI, RPostgres)](https://posit.cloud/content/11265505)
+
 ---
 ## **💡 Tip**
 
