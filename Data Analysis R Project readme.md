@@ -32,7 +32,7 @@
 
 # 📖 About the Project <a name="about-project"></a>
 
-> This project models an **E-Learning Platform** backend database. It includes **students**, **courses**, and **enrollments** tables. The project allows tracking which students enroll in which courses, analyzing performance trends, and enforcing security roles (Admin vs. User) using Supabase row-level security policies.  
+> This project models an **E-Learning Platform** database. It includes **students**, **courses**, and **enrollments** tables. The project allows tracking which students enroll in which courses, and enforcing security roles (Admin vs. User) using Supabase row-level security policies.  
 > The project integrates **R/Posit** for querying, analyzing, and visualizing academic and enrollment data.
 
 ---
@@ -72,13 +72,16 @@
 * SQL policies ensure secure role-based access.
 * R-based analysis for enrollment trends and student activity visualization.
 
+<p align="right"><a href="#about-project">back to top</a></p>
 ---
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
 > Backend-only project. Interact via Supabase SQL editor.
 
-* [Supabase Dashboard](https://supabase.com/dashboard)
+* [Supabase Project Link](https://supabase.com/dashboard/project/mhsnciubwnzincjbnpxj/sql/84e4c0de-e88e-4856-b5f2-437275cec772)
+  
+<p align="right"><a href="#about-project">back to top</a></p>
 
 ---
 
@@ -99,6 +102,349 @@ Clone the repository:
 ```bash
 git clone https://github.com/edithothieno/e-learning-platform.git
 cd e-learning-platform
+
+### Usage
+
+1. Open Supabase and create a new project.
+2. Access the SQL editor and execute `schema.sql` to create tables and insert sample data:
+
+```sql
+\i schema.sql
+```
+
+3. A quick taste of how R posit code would look like:
+
+```r
+# Load connection
+source("connect_db.R")
+con <- connect_db()
+
+# Run your query
+query <- "
+  SELECT u.username, s.title, a.name AS artist_name
+  FROM user_favorites uf
+  JOIN users u ON uf.user_id = u.user_id
+  JOIN songs s ON uf.song_id = s.song_id
+  JOIN artists a ON s.artist_id = a.artist_id
+  WHERE u.username = 'alice';
+"
+
+# Execute query and store results
+alice_favorites <- dbGetQuery(con, query)
+
+# View results
+print(alice_favorites)
+#outome : 
+# source("/cloud/project/alice_favorite.R")
+#username              title artist_name
+#1    alice Programmers choice   Sauti Sol
+
+```
+# Outcome upon running the code
+
+<img width="1366" height="634" alt="image" src="https://github.com/user-attachments/assets/586fef26-f522-47cc-9531-11af15845984" />
+---
+
+### Connecting from Posit to Supabase <a name="posit-supabase-connection"></a>
+
+1. Install required R packages:
+
+```r
+install.packages(c("DBI", "RPostgres", "dplyr", "ggplot2"))
+```
+# Successful Package Installation
+<img width="1357" height="670" alt="Successful installation" src="https://github.com/user-attachments/assets/4ff847a5-546d-4ce4-9967-426042bbbe65" />
+
+
+2. Create a `connect_db.R` file:
+
+```r
+library(DBI)
+library(RPostgres)
+
+connect_db <- function() {
+  con <- dbConnect(
+    RPostgres::Postgres(),
+    host = "aws-1-eu-north-1.pooler.supabase.com",
+    port = 6543,
+    dbname = "postgres",
+    user = "postgres.mhsnciubwnzincjbnpxj",
+    password = "cccccc",
+    sslmode = "require"
+  )
+  return(con)
+}
+
+```
+
+3. Use this connection in R scripts:
+
+```r
+source("connect_db.R")
+con <- connect_db()
+dbListTables(con)
+```
+
+---
+# Outcome after establishing connection
+<img width="1362" height="679" alt="Connect R" src="https://github.com/user-attachments/assets/1e385de7-d09c-4bb5-8d32-f4cdcb8c0d99" />
+
+
+
+# 💾 Must Have Schema SQL <a name="schema-sql"></a>
+
+
+<details>
+  <summary>Click to expand the full schema.sql that you must run in supabase before you create a conection to posit studi</summary>
+
+```sql
+-- Students Table
+CREATE TABLE students (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Courses Table
+CREATE TABLE courses (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(150) NOT NULL,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Enrollments Table
+CREATE TABLE enrollments (
+    id SERIAL PRIMARY KEY,
+    student_id INT REFERENCES students(id),
+    course_id INT REFERENCES courses(id),
+    enrolled_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Students
+INSERT INTO students (name, email, created_at) VALUES
+('Jeanne Karanu', 'jkaranu@gmail.com', '2025-09-01 10:00:00'),
+('Joseline Othieno', 'jothieno@gmail.com', '2025-09-02 11:15:00'),
+('Charles Weko', 'charlesweko@egmail.com', '2025-09-03 09:45:00'),
+('Diana Juma', 'dianaj@gmail.com', '2025-09-04 14:20:00'),
+('Ethan Liko', 'ethanliko@gmail.com', '2025-09-05 16:10:00');
+
+-- Courses
+INSERT INTO courses (title, description, created_at) VALUES
+('SQL Basics', 'Intro to SQL and Databases', '2025-09-01 08:00:00'),
+('Python for Beginners', 'Learn Python fundamentals', '2025-09-01 09:30:00'),
+('Web Development 101', 'HTML, CSS, and JavaScript basics', '2025-09-02 10:00:00'),
+('Data Analysis with SQL', 'Analyze data using SQL queries', '2025-09-03 11:00:00'),
+('Intro to Machine Learning', 'Basics of ML algorithms', '2025-09-04 12:00:00');
+
+-- Enrollments
+INSERT INTO enrollments (student_id, course_id, enrolled_at) VALUES
+(1, 1, '2025-09-06 09:00:00'),
+(1, 2, '2025-09-06 09:15:00'),
+(2, 3, '2025-09-07 10:30:00'),
+(3, 1, '2025-09-08 11:00:00'),
+(4, 5, '2025-09-09 13:45:00');
+
+-- Example query
+SELECT * courses;
+```
+
+```sql
+-- List all songs liked by Alice
+SELECT u.username, s.title, a.name AS artist_name
+FROM user_favorites uf
+JOIN users u ON uf.user_id = u.user_id
+JOIN songs s ON uf.song_id = s.song_id
+JOIN artists a ON s.artist_id = a.artist_id
+WHERE u.username = 'alice';
+```
+
+```sql
+-- Find all songs by 'Sauti Sol'
+SELECT s.title, s.release_year
+FROM songs s
+JOIN artists a ON s.artist_id = a.artist_id
+WHERE a.name = 'Sauti Sol';
+```
+
+```sql
+-- Most popular artist (by total favorites across their songs)
+-- Aggregates favorites to rank artists
+-- Example: Who is the most liked artist overall?
+SELECT a.name, COUNT(uf.user_id) AS total_favorites
+FROM artists a
+JOIN songs s ON a.artist_id = s.artist_id
+LEFT JOIN user_favorites uf ON s.song_id = uf.song_id
+GROUP BY a.artist_id
+ORDER BY total_favorites DESC;
+```
+
+</details>
+
+<p align="right"><a href="#about-project">back to top</a></p>
+
+---
+
+# 📊 R Data Analysis <a name="r-data-analysis"></a>
+
+<details>
+<summary>Click to expand full R analysis code</summary>
+
+```r
+source("connect_db.R")
+library(DBI)
+library(dplyr)
+library(ggplot2)
+
+con <- connect_db()
+
+# count students per course
+query <- "
+SELECT c.title AS course_title,
+COUNT(e.student_id) AS total_students
+FROM courses c
+LEFT JOIN enrollments e ON c.id = e.course_id
+GROUP BY c.title
+ORDER BY total_students DESC;
+"
+
+course_data <- dbGetQuery(con, query)
+
+# View data
+print(course_data)
+
+# Create a bar chart using ggplot2
+ggplot(course_data, aes(x = reorder(course_title, -total_students), y = total_students, fill = course_title)) + geom_bar(stat = "identity") + theme_minimal() +
+  labs(title = "Number of Students Enrolled per Course",  x = "Course Title", y = "Total Enrolled Students") +
+  theme(axis.text.x = element_text(angle = 30, hjust = 1, size = 10), legend.position = "none")
+
+# Active users
+active_users <- dbGetQuery(con, "
+  SELECT u.username, COUNT(uf.user_id) AS favorites_count
+  FROM user_favorites uf
+  JOIN users u ON uf.user_id = u.user_id
+  GROUP BY u.username
+  ORDER BY favorites_count DESC;
+")
+ggplot(active_users, aes(x = reorder(username, favorites_count), y = favorites_count, fill = username)) +
+  geom_col(show.legend=FALSE) + coord_flip() + theme_minimal() +
+  labs(title='Most Active Users', x='Username', y='Number of Favorites')
+
+# Artist performance
+agg_artist <- dbGetQuery(con, "
+  SELECT a.name AS artist,
+         COUNT(DISTINCT s.song_id) AS n_songs,
+         COUNT(uf.song_id) AS total_favorites
+  FROM songs s
+  JOIN artists a ON s.artist_id = a.artist_id
+  LEFT JOIN user_favorites uf ON uf.song_id = s.song_id
+  GROUP BY a.name
+")
+agg_artist <- agg_artist %>% mutate(avg_fav_per_song = total_favorites / pmax(n_songs,1))
+ggplot(agg_artist, aes(x=n_songs, y=avg_fav_per_song, size=total_favorites, label=artist)) +
+  geom_point(alpha=0.7, color='steelblue') + geom_text(vjust=-1, size=3) + theme_minimal() +
+  labs(title='Artists: Breadth vs. Popularity', subtitle='Comparing number of songs to avg favorites per song',
+       x='Number of Songs', y='Average Favorites per Song', size='Total Favorites')
+```
+
+</details>
+
+### Number of students per course
+<img width="1356" height="677" alt="no  of students per course" src="https://github.com/user-attachments/assets/60f7a808-85ee-42a8-9da9-0db77f4e6fc4" />
+
+
+
+### Most Active Users
+
+<img width="1363" height="628" alt="most active user5" src="https://github.com/user-attachments/assets/12d08288-53ce-4880-8c05-ff0382909a74" />
+
+
+### Artist Performance Bubble Chart
+<img width="1366" height="686" alt="image" src="https://github.com/user-attachments/assets/e004292a-1f80-4ad9-97cf-b56b57af8339" />
+
+
+<p align="right"><a href="#about-project">back to top</a></p>
+
+---
+
+# 📖 Data Dictionary <a name="data-dictionary"></a>
+
+**📖 Full Data Dictionary:** [Check it here](https://github.com/DENNIS-MURITHI/Data-Tools/blob/test_branch/data_dictionary.md)
+
+<p align="right"><a href="#about-project">back to top</a></p>
+
+---
+
+# 👥 Authors <a name="authors"></a>
+
+👤 **Dennis Murithi**
+
+* GitHub: [@dennismurithi](https://github.com/DENNIS-MURITHI)
+* LinkedIn: [LinkedIn](https://www.linkedin.com/in/dennis-muthuri/)
+
+<p align="right"><a href="#about-project">back to top</a></p>
+
+---
+
+# 🔭 Future Features <a name="future-features"></a>
+
+* Front-end integration with music streaming app  
+* Advanced analytics (top songs, popular artists, trends)  
+* Playlists, ratings, and user-generated content
+* 
+<p align="right"><a href="#about-project">back to top</a></p>
+
+---
+
+# 🤝 Contributing <a name="contributing"></a>
+
+Contributions, issues, and feature requests are welcome. Open an issue or submit a pull request.
+
+<p align="right"><a href="#about-project">back to top</a></p>
+
+---
+
+# ⭐️ Show your support <a name="support"></a>
+
+If you like this project, give it a ⭐️ on GitHub!
+
+<p align="right"><a href="#about-project">back to top</a></p>
+
+---
+
+# 🙏 Acknowledgements <a name="acknowledgements"></a>
+
+* [Supabase](https://supabase.com/) for PostgreSQL hosting and testing  
+* [Posit](https://docs.posit.co/connect/) Connect Documentation   
+
+<p align="right"><a href="#about-project">back to top</a></p>
+
+---
+
+# ❓ FAQ <a name="faq"></a>
+
+**1. How do I run this project in Posit?**  
+Open the repository in **Posit (RStudio)**, install dependencies, and run the R scripts step by step.  
+Make sure your Supabase credentials are set correctly in `connect_db.R`.
+
+**2. What dependencies are needed?**  
+Install the following R packages:  
+```r
+install.packages(c("DBI", "RPostgres", "dplyr", "ggplot2"))
+```
+### 3. Can I use MySQL or other databases?  
+❌ **No.** This project connects only to **Supabase (PostgreSQL)** for consistency and compatibility with R and Posit.
+
+---
+
+### 4. How do I connect Posit to Supabase?  
+Use the `DBI` and `RPostgres` packages along with your Supabase credentials found in:  
+**Supabase → Project Settings → Database → Connection Info**  
+
+# 📝 License <a name="license"></a>
+
+This project is licensed under MIT License - see [LICENSE](LICENSE) for details.
 
 ### Usage
 
