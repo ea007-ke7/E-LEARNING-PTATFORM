@@ -201,16 +201,14 @@ ggplot(course_data, aes(x = reorder(course_title, -total_students), y = total_st
 
 ---
 
+## Maintainer
+
+**Author**: **Edith Adikinyi**
+**Repository**: E-Learning Platform on GitHub
+**Database**: [Supabase (PostgreSQL)](https://supabase.com/dashboard/project/mhsnciubwnzincjbnpxj/sql/84e4c0de-e88e-4856-b5f2-437275cec772)
+**Visualization**: [ R / Posit Cloud (ggplot2, dplyr, DBI, RPostgres)](https://posit.cloud/content/11265505)
+---
 ## **💡 Tip**
 
 Connecting Posit to Supabase allows real-time queries, reproducible analysis, and clean integration with `ggplot2` for professional charts.
----
-
-## Maintainer
-
-Author: **Edith Adikinyi**
-Repository: E-Learning Platform on GitHub
-Database: Supabase (PostgreSQL)
-Visualization: R / Posit Cloud (ggplot2, dplyr, DBI, RPostgres)
-
 ---
