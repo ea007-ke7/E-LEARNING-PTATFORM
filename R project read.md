@@ -101,8 +101,8 @@
 Clone the repository:
 
 ```bash
-git clone https://github.com/ea007-ke7/E-LEARNING-PTATFORM.git
-
+git clone https://github.com/ea007-ke7/E-LEARNING-PTATFORM-database.git
+cd E-LEARNING-database
 ### Usage
 
 1. Open Supabase and create a new project.
