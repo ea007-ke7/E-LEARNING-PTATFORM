@@ -251,34 +251,44 @@ SELECT * courses;
 ```
 
 ```sql
--- List all songs liked by Alice
-SELECT u.username, s.title, a.name AS artist_name
-FROM user_favorites uf
-JOIN users u ON uf.user_id = u.user_id
-JOIN songs s ON uf.song_id = s.song_id
-JOIN artists a ON s.artist_id = a.artist_id
-WHERE u.username = 'alice';
+-- View all students and their enrolled courses
+SELECT s.name AS student_name, s.email,
+   c.title AS course_title, e.enrolled_at
+FROM enrollments e
+JOIN students s ON e.student_id = s.id
+JOIN courses c ON e.course_id = c.id
+ORDER BY s.name;
+
 ```
 
 ```sql
--- Find all songs by 'Sauti Sol'
-SELECT s.title, s.release_year
-FROM songs s
-JOIN artists a ON s.artist_id = a.artist_id
-WHERE a.name = 'Sauti Sol';
+-- Show all courses and the students enrolled in each
+SELECT  c.title AS course_title,
+COUNT(e.student_id) AS total_students
+FROM courses c
+LEFT JOIN enrollments e ON c.id = e.course_id
+GROUP BY c.title
+ORDER BY total_students DESC;
+
 ```
 
 ```sql
--- Most popular artist (by total favorites across their songs)
--- Aggregates favorites to rank artists
--- Example: Who is the most liked artist overall?
-SELECT a.name, COUNT(uf.user_id) AS total_favorites
-FROM artists a
-JOIN songs s ON a.artist_id = s.artist_id
-LEFT JOIN user_favorites uf ON s.song_id = uf.song_id
-GROUP BY a.artist_id
-ORDER BY total_favorites DESC;
+-- Find all courses for a specific student (e.g., “Jeanne Karanu”)
+SELECT s.name AS student_name, c.title AS course_title, e.enrolled_at
+FROM enrollments e
+JOIN students s ON e.student_id = s.id
+JOIN courses c ON e.course_id = c.id
+WHERE s.name = 'Jeanne Karanu';
+
 ```
+
+```sql
+-- List students enrolled in a specific course
+SELECT c.title AS course_title, s.name AS student_name, e.enrolled_at
+FROM enrollments e
+JOIN students s ON e.student_id = s.id
+JOIN courses c ON e.course_id = c.id
+WHERE c.title = 'Web Development 101';
 
 </details>
 
@@ -308,7 +318,6 @@ LEFT JOIN enrollments e ON c.id = e.course_id
 GROUP BY c.title
 ORDER BY total_students DESC;
 "
-
 course_data <- dbGetQuery(con, query)
 
 # View data
@@ -378,10 +387,10 @@ ggplot(agg_artist, aes(x=n_songs, y=avg_fav_per_song, size=total_favorites, labe
 
 # 👥 Authors <a name="authors"></a>
 
-👤 **Dennis Murithi**
+👤 **Edith Adikinyi**
 
-* GitHub: [@dennismurithi](https://github.com/DENNIS-MURITHI)
-* LinkedIn: [LinkedIn](https://www.linkedin.com/in/dennis-muthuri/)
+* GitHub: [@ea007-ke7]((https://github.com/ea007-ke7/E-LEARNING-PTATFORM))
+* LinkedIn: [LinkedIn](https:www.linkedin.com/in/edith-othieno7)
 
 <p align="right"><a href="#about-project">back to top</a></p>
 
@@ -389,17 +398,19 @@ ggplot(agg_artist, aes(x=n_songs, y=avg_fav_per_song, size=total_favorites, labe
 
 # 🔭 Future Features <a name="future-features"></a>
 
-* Front-end integration with music streaming app  
-* Advanced analytics (top songs, popular artists, trends)  
-* Playlists, ratings, and user-generated content
-* 
+* Add courses grades and attendance tracking
+* Include admin dashboard analytics in R or React
+* Allow file uploads and progress visualization
+* Add email notifications via Supabase Edge Functions
+
 <p align="right"><a href="#about-project">back to top</a></p>
 
 ---
 
 # 🤝 Contributing <a name="contributing"></a>
 
-Contributions, issues, and feature requests are welcome. Open an issue or submit a pull request.
+Contributions, issues, and feature requests are welcome!
+Open an issue or submit a pull request.
 
 <p align="right"><a href="#about-project">back to top</a></p>
 
@@ -416,7 +427,7 @@ If you like this project, give it a ⭐️ on GitHub!
 # 🙏 Acknowledgements <a name="acknowledgements"></a>
 
 * [Supabase](https://supabase.com/) for PostgreSQL hosting and testing  
-* [Posit](https://docs.posit.co/connect/) Connect Documentation   
+* [Posit](https://docs.posit.co/connect/) for interactive RStudio workspace & Connect Documentation   
 
 <p align="right"><a href="#about-project">back to top</a></p>
 
@@ -426,21 +437,22 @@ If you like this project, give it a ⭐️ on GitHub!
 
 **1. How do I run this project in Posit?**  
 Open the repository in **Posit (RStudio)**, install dependencies, and run the R scripts step by step.  
-Make sure your Supabase credentials are set correctly in `connect_db.R`.
+Make sure your Supabase credentials are correct(host, password) in `connect_db.R` for your connection to be successful.
 
-**2. What dependencies are needed?**  
+**2. What packages are needed?**  
 Install the following R packages:  
 ```r
 install.packages(c("DBI", "RPostgres", "dplyr", "ggplot2"))
 ```
-### 3. Can I use MySQL or other databases?  
-❌ **No.** This project connects only to **Supabase (PostgreSQL)** for consistency and compatibility with R and Posit.
 
----
+### 3. Why am I getting an error upon running my Rscript for connect_db.R  
+Ensure your Supabase connection credentials (host, password) are correct.
 
 ### 4. How do I connect Posit to Supabase?  
 Use the `DBI` and `RPostgres` packages along with your Supabase credentials found in:  
 **Supabase → Project Settings → Database → Connection Info**  
+
+---
 
 # 📝 License <a name="license"></a>
 
@@ -577,57 +589,3 @@ enrollments	enrollment_id	SERIAL	Primary key
 	student_id	INT	FK → students
 	course_id	INT	FK → courses
 	enrollment_date	DATE	Auto-filled date
-👥 Authors <a name="authors"></a>
-
-👤 Edith Adikinyi Othieno
-
-GitHub: @edithothieno
-
-LinkedIn: Edith Othieno
-
-🔭 Future Features <a name="future-features"></a>
-
-Add course grades and attendance tracking
-
-Include admin dashboard analytics in R or React
-
-Allow file uploads and progress visualization
-
-Add email notifications via Supabase Edge Functions
-
-🤝 Contributing <a name="contributing"></a>
-
-Contributions, issues, and feature requests are welcome!
-Open an issue or submit a pull request.
-
-⭐️ Show your support <a name="support"></a>
-
-If you like this project, give it a ⭐️ on GitHub!
-
-🙏 Acknowledgements <a name="acknowledgements"></a>
-
-Supabase
- for free PostgreSQL hosting
-
-Posit
- for interactive RStudio workspace
-
-❓ FAQ <a name="faq"></a>
-
-Q1: Why can’t I see my tables in Posit?
-👉 Ensure your Supabase connection credentials (host, password) are correct.
-
-Q2: How do I apply policies?
-👉 Run your week2_policies.sql file in Supabase’s SQL Editor.
-
-Q3: What packages are required in R?
-
-install.packages(c("DBI", "RPostgres", "dplyr", "ggplot2"))
-
-📝 License <a name="license"></a>
-
-This project is licensed under the MIT License — see LICENSE
- for details.
-
-
----
