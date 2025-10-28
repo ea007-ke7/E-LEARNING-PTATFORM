@@ -145,7 +145,8 @@ print(course_enrollments)
 ```
 # Outcome upon running the code
 
-<img width="1359" height="682" alt="enrollments per courses" src="https://github.com/user-attachments/assets/7d043e13-ed1a-4cb2-8227-159105993c5d" />
+<img width="1299" height="436" alt="enrollments per courses" src="https://github.com/user-attachments/assets/579d0d78-3621-4394-a1d4-9136e12f05cd" />
+
 
 ---
 
@@ -191,7 +192,8 @@ dbListTables(con)
 
 ---
 # Outcome after establishing connection
-<img width="1362" height="679" alt="Connect R" src="https://github.com/user-attachments/assets/1e385de7-d09c-4bb5-8d32-f4cdcb8c0d99" />
+
+<img width="1361" height="685" alt="connect_db R" src="https://github.com/user-attachments/assets/3d8d6e66-ec0d-481f-b077-af5ecf893623" />
 
 
 
