@@ -100,8 +100,7 @@
 Clone the repository:
 
 ```bash
-git clone https://github.com/edithothieno/e-learning-platform.git
-cd e-learning-platform
+git clone https://github.com/ea007-ke7/E-LEARNING-PTATFORM.git
 
 ### Usage
 
